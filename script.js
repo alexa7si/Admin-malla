@@ -1,4 +1,3 @@
-// Cursos por ciclo según el plan 2022
 const ciclos = [
   ['Nivelación en Matemáticas', 'Nivelación en Informática', 'Nivelación en Lenguaje'],
   ['Matemáticas I', 'Fundamentos de Contabilidad', 'Lenguaje I', 'Fundamentos de las Ciencias Empresariales'],
@@ -12,7 +11,6 @@ const ciclos = [
   ['Investigación Aplicada a los Negocios', 'Dirección Estratégica', 'Proyecto Empresarial', 'Gestión de la Sostenibilidad']
 ];
 
-// Relaciones (dependencias) extraídas del flujograma
 const edges = [
   ['Nivelación en Matemáticas', 'Matemáticas I'],
   ['Matemáticas I', 'Matemáticas para los Negocios'],
@@ -29,7 +27,6 @@ const edges = [
   ['Gestión de la Cadena de Suministros', 'Proyecto Empresarial']
 ];
 
-// Colores rosados por área
 const areaColor = {
   'Contabilidad': '#d63384',
   'Economía': '#f783ac',
@@ -45,24 +42,31 @@ const areaColor = {
   'Proyección': '#f3d3e9'
 };
 
-// Buscar cursos que se habilitan
 const aprobados = new Set();
 const conexiones = {};
+const prerrequisitos = {};
 
 edges.forEach(([origen, destino]) => {
   if (!conexiones[origen]) conexiones[origen] = [];
+  if (!prerrequisitos[destino]) prerrequisitos[destino] = [];
   conexiones[origen].push(destino);
+  prerrequisitos[destino].push(origen);
 });
 
 function detectarColor(curso) {
   return Object.entries(areaColor).find(([clave]) => curso.includes(clave))?.[1] || '#ffc0cb';
 }
 
+function estaHabilitado(curso) {
+  const requisitos = prerrequisitos[curso] || [];
+  return requisitos.every(req => aprobados.has(req));
+}
+
 function render() {
   const malla = document.getElementById('malla');
   malla.innerHTML = '';
 
-  ciclos.forEach((cursos, idx) => {
+  ciclos.forEach(cursos => {
     const col = document.createElement('div');
     col.className = 'columna';
 
@@ -72,15 +76,15 @@ function render() {
       div.textContent = curso;
       div.style.background = detectarColor(curso);
 
-      if (aprobados.has(curso)) div.classList.add('activo');
+      const aprobado = aprobados.has(curso);
+      const habilitado = estaHabilitado(curso);
+
+      if (aprobado) div.classList.add('aprobado');
+      if (habilitado) div.classList.add('habilitado');
 
       div.onclick = () => {
-        if (aprobados.has(curso)) {
-          aprobados.delete(curso);
-        } else {
-          aprobados.add(curso);
-          expandir(curso);
-        }
+        if (aprobado) aprobados.delete(curso);
+        else if (habilitado) aprobados.add(curso);
         render();
       };
 
@@ -89,11 +93,6 @@ function render() {
 
     malla.appendChild(col);
   });
-}
-
-function expandir(curso) {
-  const siguientes = conexiones[curso] || [];
-  siguientes.forEach(sig => aprobados.add(sig));
 }
 
 render();
