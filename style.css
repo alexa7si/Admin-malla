@@ -28,11 +28,11 @@ h1 {
 .curso {
   padding: 10px;
   color: white;
-  background: #f8bbd0; /* Rosado pastel único */
+  background: #d6d6d6; /* gris claro por defecto */
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
-  opacity: 0.3; /* por defecto, opaco */
+  opacity: 0.5;
   transition: all 0.2s ease;
   text-align: center;
   font-size: 14px;
@@ -40,15 +40,15 @@ h1 {
 }
 
 .curso.habilitado {
+  background: #f8bbd0; /* rosado pastel */
   opacity: 1;
-  background: #f8bbd0; /* mismo rosado pastel */
 }
 
 .curso.aprobado {
   text-decoration: line-through;
   text-decoration-color: black;
   font-weight: bold;
-  background: #f8bbd0;
+  background: #f8bbd0; /* rosado pastel */
   opacity: 1;
   box-shadow: 0 0 8px rgba(214, 51, 132, 0.4);
 }
