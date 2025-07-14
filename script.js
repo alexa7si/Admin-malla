@@ -27,21 +27,7 @@ const edges = [
   ['Gestión de la Cadena de Suministros', 'Proyecto Empresarial']
 ];
 
-const areaColor = {
-  'Contabilidad': '#d63384',
-  'Economía': '#f783ac',
-  'Matemáticas': '#faa2c1',
-  'Marketing': '#fcc2d7',
-  'Finanzas': '#e64980',
-  'Gestión': '#f06595',
-  'Derecho': '#ffb3c1',
-  'Lenguaje': '#ffdeeb',
-  'Investigación': '#f8bbd0',
-  'Bloque': '#ffdce0',
-  'Ética': '#f5c2e7',
-  'Proyección': '#f3d3e9'
-};
-
+// Relaciones
 const aprobados = new Set();
 const conexiones = {};
 const prerrequisitos = {};
@@ -53,10 +39,7 @@ edges.forEach(([origen, destino]) => {
   prerrequisitos[destino].push(origen);
 });
 
-function detectarColor(curso) {
-  return Object.entries(areaColor).find(([clave]) => curso.includes(clave))?.[1] || '#ffc0cb';
-}
-
+// Verifica si el curso ya está habilitado (todos sus prerrequisitos están aprobados)
 function estaHabilitado(curso) {
   const requisitos = prerrequisitos[curso] || [];
   return requisitos.every(req => aprobados.has(req));
@@ -74,17 +57,19 @@ function render() {
       const div = document.createElement('div');
       div.className = 'curso';
       div.textContent = curso;
-      div.style.background = detectarColor(curso);
 
       const aprobado = aprobados.has(curso);
       const habilitado = estaHabilitado(curso);
 
       if (aprobado) div.classList.add('aprobado');
-      if (habilitado) div.classList.add('habilitado');
+      else if (habilitado) div.classList.add('habilitado');
 
       div.onclick = () => {
-        if (aprobado) aprobados.delete(curso);
-        else if (habilitado) aprobados.add(curso);
+        if (aprobado) {
+          aprobados.delete(curso);
+        } else if (habilitado) {
+          aprobados.add(curso);
+        }
         render();
       };
 
