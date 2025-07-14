@@ -28,7 +28,7 @@ h1 {
 .curso {
   padding: 10px;
   color: white;
-  background: #d6d6d6; /* gris claro por defecto */
+  background: #d6d6d6; /* gris por defecto (no habilitado) */
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
@@ -40,15 +40,15 @@ h1 {
 }
 
 .curso.habilitado {
-  background: #f8bbd0;
+  background: #f8bbd0; /* rosado pastel */
   opacity: 1;
 }
 
 .curso.aprobado {
-  background: #f8bbd0;
+  background: #e91e63; /* rosado fuerte */
   opacity: 1;
   font-weight: bold;
   text-decoration: line-through;
   text-decoration-color: black;
-  box-shadow: 0 0 8px rgba(214, 51, 132, 0.4);
+  box-shadow: 0 0 8px rgba(233, 30, 99, 0.4);
 }
