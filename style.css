@@ -28,7 +28,7 @@ h1 {
 .curso {
   padding: 10px;
   color: white;
-  background: #f8bbd0; /* Rosado pastel */
+  background: #f8bbd0; /* Rosado pastel único */
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
@@ -41,13 +41,14 @@ h1 {
 
 .curso.habilitado {
   opacity: 1;
-  background: #f8bbd0; /* rosado pastel */
+  background: #f8bbd0; /* mismo rosado pastel */
 }
 
 .curso.aprobado {
   text-decoration: line-through;
   text-decoration-color: black;
   font-weight: bold;
-  box-shadow: 0 0 8px rgba(214, 51, 132, 0.4);
   background: #f8bbd0;
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(214, 51, 132, 0.4);
 }
