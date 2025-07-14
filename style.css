@@ -40,15 +40,15 @@ h1 {
 }
 
 .curso.habilitado {
-  background: #f8bbd0; /* rosado pastel */
+  background: #f8bbd0;
   opacity: 1;
 }
 
 .curso.aprobado {
+  background: #f8bbd0;
+  opacity: 1;
+  font-weight: bold;
   text-decoration: line-through;
   text-decoration-color: black;
-  font-weight: bold;
-  background: #f8bbd0; /* rosado pastel */
-  opacity: 1;
   box-shadow: 0 0 8px rgba(214, 51, 132, 0.4);
 }
