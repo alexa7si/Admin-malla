@@ -1,0 +1,46 @@
+body {
+  font-family: sans-serif;
+  background: #fff;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #d63384;
+}
+
+#malla {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 40px;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.curso {
+  padding: 10px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+
+.curso.activo {
+  opacity: 1;
+  transform: scale(1.04);
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(214, 51, 132, 0.4);
+}
