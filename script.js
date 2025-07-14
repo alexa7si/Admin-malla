@@ -27,7 +27,7 @@ const edges = [
   ['Gestión de la Cadena de Suministros', 'Proyecto Empresarial']
 ];
 
-// Relaciones
+// Estructuras para relaciones entre cursos
 const aprobados = new Set();
 const conexiones = {};
 const prerrequisitos = {};
@@ -39,12 +39,10 @@ edges.forEach(([origen, destino]) => {
   prerrequisitos[destino].push(origen);
 });
 
-// Verifica si el curso ya está habilitado (todos sus prerrequisitos están aprobados)
 function estaHabilitado(curso) {
   const requisitos = prerrequisitos[curso] || [];
   return requisitos.every(req => aprobados.has(req));
 }
-
 function render() {
   const malla = document.getElementById('malla');
   malla.innerHTML = '';
@@ -61,8 +59,11 @@ function render() {
       const aprobado = aprobados.has(curso);
       const habilitado = estaHabilitado(curso);
 
-      if (aprobado) div.classList.add('aprobado');
-      else if (habilitado) div.classList.add('habilitado');
+      if (aprobado) {
+        div.classList.add('aprobado');
+      } else if (habilitado) {
+        div.classList.add('habilitado');
+      }
 
       div.onclick = () => {
         if (aprobado) {
